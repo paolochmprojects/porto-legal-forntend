@@ -17,6 +17,8 @@ export const authenticatedGuard = async (
     //     return next()
     // };
 
+    if (authStore.isLoggedIn) return next();
+
     authStore.removeAuthToken();
 
     return next({ name: 'login', query: { nexturl: nextUrl } });
