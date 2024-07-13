@@ -57,8 +57,28 @@ const router = createRouter({
         {
             path: '/dashboard',
             name: 'dashboard',
-            beforeEnter: [authenticatedGuard],
             component: () => import('@/modules/dashboard/layouts/DashboardLayout.vue'),
+            redirect: { name: 'dashboard' },
+            children: [
+                {
+                    path: '',
+                    name: 'dashboard',
+                    beforeEnter: [authenticatedGuard],
+                    component: () => import('@/modules/dashboard/pages/ProjectsPage.vue'),
+                },
+                {
+                    path: 'tasks',
+                    name: 'tasks',
+                    beforeEnter: [authenticatedGuard],
+                    component: () => import('@/modules/dashboard/pages/TasksPage.vue'),
+                },
+                {
+                    path: 'profile',
+                    name: 'profile',
+                    beforeEnter: [authenticatedGuard],
+                    component: () => import('@/modules/dashboard/pages/ProfilePage.vue'),
+                }
+            ]
         },
         {
             path: '/:pathMatch(.*)*',
