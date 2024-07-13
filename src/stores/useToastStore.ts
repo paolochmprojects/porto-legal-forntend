@@ -13,8 +13,6 @@ export const useToastStore = defineStore("toast", () => {
 
     const addToast = (newToast: Toast) => {
 
-        console.log(newToast);
-
         toasts.value.push(newToast);
 
         setTimeout(() => {

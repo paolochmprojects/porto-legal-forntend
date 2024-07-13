@@ -28,7 +28,8 @@
       </div>
       <div className="form-control mt-6">
         <button type="submit" className="btn btn-sm btn-primary" :disabled="isLoading">
-          {{ isLoading ? 'Loading...' : 'Login' }}
+          <span v-if="isLoading" className="loading loading-spinner loading-xs"></span>
+          Login
         </button>
         <div className="divider">o</div>
         <div class="flex flex-col gap-4">

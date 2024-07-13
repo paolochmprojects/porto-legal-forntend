@@ -1,6 +1,7 @@
 import { authenticatedGuard } from '@/modules/auth/guards/authenticated.guard';
 import LandingLayout from '@/modules/landing/layouts/LandingLayout.vue';
 import HomePage from '@/modules/landing/pages/HomePage.vue';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -28,11 +29,27 @@ const router = createRouter({
                 {
                     path: 'login',
                     name: 'login',
+                    beforeEnter: (to, from, next) => {
+                        const authStore = useAuthStore();
+                        if (authStore.isLoggedIn) {
+                            next({ name: 'dashboard' });
+                        } else {
+                            next();
+                        }
+                    },
                     component: () => import('@/modules/auth/pages/LoginPage.vue'),
                 },
                 {
                     path: 'register',
                     name: 'register',
+                    beforeEnter: (to, from, next) => {
+                        const authStore = useAuthStore();
+                        if (authStore.isLoggedIn) {
+                            next({ name: 'dashboard' });
+                        } else {
+                            next();
+                        }
+                    },
                     component: () => import('@/modules/auth/pages/RegisterPage.vue'),
                 }
             ]
