@@ -1,3 +1,4 @@
+import { authenticatedGuard } from '@/modules/auth/guards/authenticated.guard';
 import LandingLayout from '@/modules/landing/layouts/LandingLayout.vue';
 import HomePage from '@/modules/landing/pages/HomePage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -35,6 +36,12 @@ const router = createRouter({
                     component: () => import('@/modules/auth/pages/RegisterPage.vue'),
                 }
             ]
+        },
+        {
+            path: '/dashboard',
+            name: 'dashboard',
+            beforeEnter: [authenticatedGuard],
+            component: () => import('@/modules/dashboard/layouts/DashboardLayout.vue'),
         },
         {
             path: '/:pathMatch(.*)*',

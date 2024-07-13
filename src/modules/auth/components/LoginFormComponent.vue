@@ -27,7 +27,9 @@
         />
       </div>
       <div className="form-control mt-6">
-        <button type="submit" className="btn btn-sm btn-primary">Login</button>
+        <button type="submit" className="btn btn-sm btn-primary" :disabled="isLoading">
+          {{ isLoading ? 'Loading...' : 'Login' }}
+        </button>
         <div className="divider">o</div>
         <div class="flex flex-col gap-4">
           <router-link :to="{ name: 'register' }" className="btn btn-sm btn-primary">
@@ -44,11 +46,29 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { loginAction } from '../actions.ts/login.action';
+import { useRoute, useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
+const isLoading = ref(false);
 
-const submitLogin = () => {
-  console.log(email.value, password.value);
+const router = useRouter();
+const route = useRoute();
+
+const submitLogin = async () => {
+  isLoading.value = true;
+  const { success, message } = await loginAction({ email: email.value, password: password.value });
+  isLoading.value = false;
+
+  if (!success) {
+    alert(message);
+    return;
+  }
+
+  const { nexturl } = route.query as { nexturl?: string };
+
+  router.replace(nexturl ? nexturl : { name: 'dashboard' });
+  return;
 };
 </script>
