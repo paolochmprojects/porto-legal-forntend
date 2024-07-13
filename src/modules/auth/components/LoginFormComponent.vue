@@ -48,6 +48,7 @@
 import { ref } from 'vue';
 import { loginAction } from '../actions.ts/login.action';
 import { useRoute, useRouter } from 'vue-router';
+import { useToastStore } from '@/stores/useToastStore';
 
 const email = ref('');
 const password = ref('');
@@ -55,6 +56,7 @@ const isLoading = ref(false);
 
 const router = useRouter();
 const route = useRoute();
+const toastStore = useToastStore();
 
 const submitLogin = async () => {
   isLoading.value = true;
@@ -62,12 +64,18 @@ const submitLogin = async () => {
   isLoading.value = false;
 
   if (!success) {
-    alert(message);
+    toastStore.addToast({
+      message: message,
+      type: 'error',
+    });
     return;
   }
 
   const { nexturl } = route.query as { nexturl?: string };
-
+  toastStore.addToast({
+    message: message,
+    type: 'success',
+  });
   router.replace(nexturl ? nexturl : { name: 'dashboard' });
   return;
 };
