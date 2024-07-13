@@ -1,6 +1,6 @@
+import LandingLayout from '@/modules/landing/layouts/LandingLayout.vue';
+import HomePage from '@/modules/landing/pages/HomePage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import NotFoundView from '@/modules/common/pages/NotFoundPage.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +8,15 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView,
+            redirect: { name: 'landing' },
+            component: LandingLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'landing',
+                    component: HomePage,
+                },
+            ],
         },
         {
             path: '/auth',
@@ -31,7 +39,7 @@ const router = createRouter({
         {
             path: '/:pathMatch(.*)*',
             name: 'not-found',
-            component: NotFoundView,
+            component: () => import('@/modules/common/pages/NotFoundPage.vue'),
         },
     ],
 });

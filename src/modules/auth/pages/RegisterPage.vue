@@ -1,3 +1,7 @@
 <template>
-  <h1>Register</h1>
+  <register-form-component />
 </template>
+
+<script lang="ts" setup>
+import RegisterFormComponent from '@/modules/auth/components/RegisterFormComponent.vue';
+</script>

@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar-brand {
+    @apply font-bebas-neue text-2xl font-bold;
+}
