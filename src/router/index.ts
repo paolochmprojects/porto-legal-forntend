@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import NotFoundView from '../views/NotFoundView.vue';
+import NotFoundView from '@/modules/common/pages/NotFoundPage.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,16 +11,26 @@ const router = createRouter({
             component: HomeView,
         },
         {
-            path: '/about',
-            name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import('../views/AboutView.vue'),
+            path: '/auth',
+            redirect: '/auth/login',
+            name: 'auth',
+            component: () => import('@/modules/auth/layouts/AuthLayout.vue'),
+            children: [
+                {
+                    path: 'login',
+                    name: 'login',
+                    component: () => import('@/modules/auth/pages/LoginPage.vue'),
+                },
+                {
+                    path: 'register',
+                    name: 'register',
+                    component: () => import('@/modules/auth/pages/RegisterPage.vue'),
+                }
+            ]
         },
         {
             path: '/:pathMatch(.*)*',
-            name: 'notFound',
+            name: 'not-found',
             component: NotFoundView,
         },
     ],
