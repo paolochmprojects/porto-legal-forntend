@@ -10,12 +10,12 @@ export const authenticatedGuard = async (
 
     const nextUrl = to.fullPath;
 
-    if (authStore.isLoggedIn) {
-        if (to.name === 'login' || to.name === 'register') {
-            return next({ name: 'dashboard' });
-        }
-        return next()
-    };
+    // if (authStore.isLoggedIn) {
+    //     if (to.name === 'login' || to.name === 'register') {
+    //         return next({ name: 'dashboard' });
+    //     }
+    //     return next()
+    // };
 
     authStore.removeAuthToken();
 
