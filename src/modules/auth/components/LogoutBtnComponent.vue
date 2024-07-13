@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { logoutAction } from '../actions.ts/logout.action';
+import { logoutAction } from '../actions/logout.action';
 import { ref } from 'vue';
 import { useToastStore } from '@/stores/useToastStore';
 

@@ -46,7 +46,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { loginAction } from '../actions.ts/login.action';
+import { loginAction } from '../actions/login.action';
 import { useRoute, useRouter } from 'vue-router';
 import { useToastStore } from '@/stores/useToastStore';
 
