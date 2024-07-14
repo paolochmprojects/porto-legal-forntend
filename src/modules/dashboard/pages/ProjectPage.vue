@@ -32,15 +32,6 @@ const fetchProject = async () => {
   description.value = data.description;
 };
 
-watch(title, (newvalue) => {
-  if (newvalue.length > 64) {
-    toastStore.addToast({
-      message: 'Title cannot be longer than 64 characters',
-      type: 'error',
-    });
-  }
-});
-
 onMounted(async () => {
   await fetchProject();
 });
