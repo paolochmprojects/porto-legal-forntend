@@ -47,6 +47,9 @@ onMounted(async () => {
           class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2 shadow"
         >
           <li>
+            <router-link class="" :to="{ name: 'projects' }">My projects</router-link>
+          </li>
+          <li>
             <router-link class="" :to="{ name: 'profile' }"> Profile </router-link>
           </li>
           <li>

@@ -58,13 +58,25 @@ const router = createRouter({
             path: '/dashboard',
             name: 'dashboard',
             component: () => import('@/modules/dashboard/layouts/DashboardLayout.vue'),
-            redirect: { name: 'dashboard' },
+            redirect: { name: 'projects' },
             children: [
                 {
-                    path: '',
-                    name: 'dashboard',
+                    path: 'projects',
+                    name: 'projects',
                     beforeEnter: [authenticatedGuard],
                     component: () => import('@/modules/dashboard/pages/ProjectsPage.vue'),
+                },
+                {
+                    path: 'projects/:id',
+                    name: 'view-project',
+                    beforeEnter: [authenticatedGuard],
+                    component: () => import('@/modules/dashboard/pages/ProjectPage.vue'),
+                },
+                {
+                    path: 'create-project',
+                    name: 'create-project',
+                    beforeEnter: [authenticatedGuard],
+                    component: () => import('@/modules/dashboard/pages/ProjectPage.vue'),
                 },
                 {
                     path: 'tasks',
