@@ -79,8 +79,8 @@ const router = createRouter({
                     component: () => import('@/modules/dashboard/pages/ProjectPage.vue'),
                 },
                 {
-                    path: 'tasks',
-                    name: 'tasks',
+                    path: 'projects/:id/tasks',
+                    name: 'create-task',
                     beforeEnter: [authenticatedGuard],
                     component: () => import('@/modules/dashboard/pages/TasksPage.vue'),
                 },

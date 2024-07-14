@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import TasksComponent from '@/modules/dashboard/components/TasksComponent.vue';
 import { useToastStore } from '@/stores/useToastStore';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { createProject, getProject, updateProject } from '../actions/projects.actions';
 
@@ -12,9 +13,9 @@ const toastStore = useToastStore();
 const router = useRouter();
 const route = useRoute();
 
-const fetchProject = async () => {
-  const projectId = route.params.id as string | undefined;
+const projectId = route.params.id as string | undefined;
 
+const fetchProject = async () => {
   if (!projectId) return;
 
   const { success, data, message } = await getProject(projectId);
@@ -142,4 +143,5 @@ const handleSubmit = async () => {
       </div>
     </form>
   </div>
+  <tasks-component v-if="projectId" :projectId="projectId" />
 </template>
