@@ -22,7 +22,7 @@ npm install
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Revision de tipos, compilación y optimización
 
 ```sh
 npm run build
